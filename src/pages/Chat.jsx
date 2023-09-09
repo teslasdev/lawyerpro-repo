@@ -103,7 +103,7 @@ const Chat = () => {
             </div>
          </div>
 
-         <div className='sm:h-[78%] h-[90%] flex items-center gap-2 justify-between p-2'>
+         <div className='sm:h-[78%] h-[80%] flex items-center gap-2 justify-between p-2'>
             <div className='w-[20%] h-full hidden sm:flex items-start flex-col gap-5 justify-start p-6 rounded-lg bg-white border overflow-scroll'>
                <h4 className='text-xl font-light'>Hello, tenser flux 👋</h4>
                <button className='primary-color-btn rounded-full text-sm font-light p-3 w-full'>+ New Chat</button>
