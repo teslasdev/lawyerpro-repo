@@ -56,7 +56,7 @@ const Chat = () => {
       
    }
    return (
-      <div className='h-screen'>
+      <div className='h-screen fixed w-full'>
          { popUp &&
             <PopupModal setPopUpTrial={setPopUpTrial}  />
          }
@@ -64,7 +64,7 @@ const Chat = () => {
             <PopupModalNote setPopUpTrial={setPopUpTrial} setPopUp={setPopUp} />
          }
          
-         <div className='h-[10%] sm:h-[13%] bg-white sm:bg-transparent flex items-center justify-between px-5'>
+         <div className='h-[5%] sm:h-[13%] bg-white sm:bg-transparent flex items-center justify-between px-5'>
             <div>
                <h1 className='font-bold text-lg'>Lawyer Pro Ai</h1>
             </div>
@@ -157,10 +157,10 @@ const Chat = () => {
 
                <div className='sm:h-[65%] h-[80%] flex p-4 flex-col overflow-scroll items-start gap-3'>
                   <div className='w-full flex justify-start'>
-                     <p className='bg-[#f1f1f3] sm:max-w-[60%] max-w-[90%] text-start sm:text-[16px] text-[13px] sm:leading-8 leading-6 font-light p-2 rounded-t-lg rounded-r-lg'>hello,How arw you doing today</p>
+                     <p className='bg-[#f1f1f3] sm:max-w-[60%] max-w-[90%] text-start  text-[16px] sm:leading-8 leading-6 font-light p-2 rounded-t-lg rounded-r-lg'>hello,How arw you doing today</p>
                   </div>
                   <div className='w-full flex justify-end'>
-                     <p className='bg-[#f2f0e4] sm:max-w-[60%] max-w-[90%] sm:text-[16px] text-[13px] leading-8 font-light  p-2 rounded-t-lg rounded-l-lg'>Hello</p>
+                     <p className='bg-[#f2f0e4] sm:max-w-[60%] max-w-[90%] text-[16px]  leading-8 font-light  p-2 rounded-t-lg rounded-l-lg'>Hello</p>
                   </div>
                </div>
 

@@ -7,7 +7,7 @@ export const PopupModal = ({setPopUpTrial}) => {
    const [ check , setCheck] = useState(false)
   return (
     <div className='h-screen flex justify-center items-center fixed w-full bg-blur'>
-      <div className='sm:w-[32%] w-[95%] transition-all bg-gray-50 overflow-scroll border rounded-lg sm:h-[700px] h-[500px]'>
+      <div className='sm:w-[32%] w-[90%] transition-all bg-gray-50 overflow-scroll border rounded-lg sm:h-[700px] h-[600px]'>
          <div className='text-[#A21D4E] text-xs  w-full flex justify-end p-3 cursor-pointer' onClick={() => setPopUpTrial(true)}>
             Close
          </div>
@@ -26,7 +26,7 @@ export const PopupModal = ({setPopUpTrial}) => {
                <h3 className='sm:w-[70%] w-[90%]'>Unlock full service with PRO, protect your rights and wallet.</h3>
                <img src={priceBanner} alt="" srcset="" />
 
-               <div className='border-gray-200 sm:h-[260px] flex flex-col sm:border-2 border sm:w-[80%] w-[98%] rounded-2xl'>
+               <div className='border-gray-200 sm:h-[260px] flex flex-col sm:border-2 border sm:w-[80%] w-[80%] rounded-2xl'>
                   <div className='sm:h-[20%] p-2 bg-[#A21D4E] rounded-t-2xl'>
                      <p className='font-normal text-white text-sm'>50% discount for new users!</p>
                   </div>
@@ -78,7 +78,7 @@ export const PopupModal = ({setPopUpTrial}) => {
                <h3 className='w-[70%]'>Supercharge your education process 📚🚀</h3>
                <img src={priceBanner1} alt="" srcset="" />
 
-               <div className='border-gray-200 h-[260px] flex flex-col border-2 sm:w-[80%] w-[98%] rounded-2xl'>
+               <div className='border-gray-200 h-[260px] flex flex-col border-2 sm:w-[80%] w-[80%] rounded-2xl'>
                   <div className='sm:h-[20%] p-2 bg-[#A21D4E] rounded-t-2xl flex items-center justify-center'>
                      <p className='font-normal text-white text-sm'>50% discount for new users!</p>
                   </div>
@@ -139,7 +139,7 @@ export const PopupModalNote = ({setPopUp,setPopUpTrial}) => {
    }
   return (
     <div className='h-screen flex justify-center items-center fixed w-full bg-blur'>
-      <div className='sm:w-[32%] w-[95%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg sm:h-[700px] h-[500px]'>
+      <div className='sm:w-[32%] w-[90%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg sm:h-[700px] h-[600px]'>
          <div className='text-[#ffffff] text-xs  w-full flex justify-end p-3 cursor-pointer' onClick={() => handleCancel()}>
             Close
          </div>
@@ -165,7 +165,7 @@ export const PopupModalPrompt = ({setPopUp,setPopUpTrial}) => {
    }
   return (
     <div className='h-screen flex justify-center items-center fixed w-full bg-blur'>
-      <div className='sm:w-[32%] w-[95%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg sm:h-[700px] h-[500px]'>
+      <div className='sm:w-[32%] w-[90%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg sm:h-[700px] h-[600px]'>
          <div className='text-[#ffffff] text-xs  w-full flex justify-end p-3 cursor-pointer' onClick={() => handleCancel()}>
             Close
          </div>
