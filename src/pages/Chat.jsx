@@ -114,6 +114,7 @@ const Chat = () => {
                content  : prompt
             }
          ])
+         setPrompt("")
         let url = "https://api.openai.com/v1/chat/completions";
         let data = {
          model: 'gpt-3.5-turbo',
@@ -164,7 +165,7 @@ const Chat = () => {
   
         source.addEventListener("readystatechange", (e) => {
           if (e.readyState >= 2) {
-            console.log('yes')
+            console.log('DONE')
           }
         });
   
