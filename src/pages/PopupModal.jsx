@@ -7,7 +7,7 @@ export const PopupModal = ({setPopUpTrial}) => {
    const [ check , setCheck] = useState(false)
   return (
     <div className='h-screen flex justify-center items-center fixed w-full bg-blur'>
-      <div className='sm:w-[32%] w-[90%] transition-all bg-gray-50 overflow-scroll border rounded-lg h-[700px]'>
+      <div className='sm:w-[32%] w-[90%] transition-all bg-gray-50 overflow-scroll border rounded-lg h-[70%]]'>
          <div className='text-[#A21D4E] text-xs  w-full flex justify-end p-3 cursor-pointer' onClick={() => setPopUpTrial(true)}>
             Close
          </div>
@@ -139,7 +139,7 @@ export const PopupModalNote = ({setPopUp,setPopUpTrial}) => {
    }
   return (
     <div className='h-screen flex justify-center items-center fixed w-full bg-blur'>
-      <div className='sm:w-[32%] w-[90%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg h-[700px]'>
+      <div className='sm:w-[32%] w-[90%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg h-[70%]'>
          <div className='text-[#ffffff] text-xs  w-full flex justify-end p-3 cursor-pointer' onClick={() => handleCancel()}>
             Close
          </div>
@@ -165,7 +165,7 @@ export const PopupModalPrompt = ({setPopUp,setPopUpTrial}) => {
    }
   return (
     <div className='h-screen flex justify-center items-center fixed w-full bg-blur'>
-      <div className='sm:w-[32%] w-[90%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg h-[700px]'>
+      <div className='sm:w-[32%] w-[90%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg h-[70%]'>
          <div className='text-[#ffffff] text-xs  w-full flex justify-end p-3 cursor-pointer' onClick={() => handleCancel()}>
             Close
          </div>

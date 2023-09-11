@@ -34,5 +34,12 @@ body {
 .bg-blur {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
+  z-index: 999;
+}
+
+
+.bg-blur-loader {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
   z-index: 9999;
 }
