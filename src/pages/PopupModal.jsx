@@ -2,12 +2,32 @@ import React, { useState } from 'react'
 import priceBanner from './image.ea7ab90344d3c6c99a78.png'
 import priceBanner1 from './imageStud.8cf15bd0d1b0c00fac23.png'
 import {IoMdRadioButtonOff , IoMdRadioButtonOn} from 'react-icons/io'
+import Loader from '../Loader'
+import { useNavigate } from 'react-router-dom'
 export const PopupModal = ({setPopUpTrial}) => {
+   const navigate = useNavigate();
    const [ select , setSelect] = useState(true)
    const [ check , setCheck] = useState(false)
+   const [isLoading , setIsLoading] = useState(false) 
+
+   const onPay = (planType,plan) => {
+      setIsLoading(true)
+      setTimeout(() => {
+         if(planType === 'weekly' && plan === 'individual') {
+            window.location.replace('https://buy.stripe.com/test_00gg2ngEb1Xd6XK9AA')
+         } else if(planType === 'annually' && plan === 'individual') {
+            window.location.replace('https://buy.stripe.com/test_00gaI387F6dt2HuaEI')
+         } else if(planType === 'weekly' && plan === 'student') {
+            window.location.replace('https://buy.stripe.com/test_5kA7vR0FdbxN95S7su')
+         } else {
+            window.location.replace('https://buy.stripe.com/test_3cs8zVfA731h95SeUX')
+         }
+      } , 3000)
+      // alert(planType)
+   } 
   return (
     <div className='h-screen flex justify-center items-center fixed w-full bg-blur'>
-      <div className='sm:w-[32%] w-[90%] transition-all bg-gray-50 overflow-scroll border rounded-lg h-[70%]]'>
+      <div className='sm:w-[32%] w-[90%] transition-all bg-gray-50 overflow-scroll border rounded-lg h-[60%]]'>
          <div className='text-[#A21D4E] text-xs  w-full flex justify-end p-3 cursor-pointer' onClick={() => setPopUpTrial(true)}>
             Close
          </div>
@@ -68,7 +88,7 @@ export const PopupModal = ({setPopUpTrial}) => {
                   </div>
 
                   <div className='sm:px-12 p-4 h-[40%] flex justify-center items-center'>
-                     <button className='primary-color-btn rounded-full text-sm font-light p-3 py-4 w-full cursor-pointer'>Continue</button>
+                     <div className='primary-color-btn rounded-full flex justify-center items-center text-sm font-light p-3 py-4 w-full cursor-pointer' onClick={() => onPay(!check ? 'weekly' : 'annually','individual')}>{isLoading ? <div className='flex items-center justify-center'><div className="w-4 h-4 rounded-full border-4 border-t-red-800 animate-spin" /></div> : 'Continue'}</div>
                   </div>
                   
                </div>
@@ -120,7 +140,7 @@ export const PopupModal = ({setPopUpTrial}) => {
                   </div>
 
                   <div className='sm:px-12 p-4 h-[40%] flex justify-center items-center'>
-                     <button className='primary-color-btn rounded-full text-sm font-light p-3 py-4 w-full cursor-pointer'>Continue</button>
+                     <div className='primary-color-btn rounded-full flex justify-center items-center text-sm font-light p-3 py-4 w-full cursor-pointer' onClick={() => onPay(!check ? 'weekly' : 'annually','student')}>{isLoading ? <div className='flex items-center justify-center'><div className="w-4 h-4 rounded-full border-4 border-t-red-800 animate-spin" /></div> : 'Continue'}</div>
                   </div>
                </div>
 
@@ -139,7 +159,7 @@ export const PopupModalNote = ({setPopUp,setPopUpTrial}) => {
    }
   return (
     <div className='h-screen flex justify-center items-center fixed w-full bg-blur'>
-      <div className='sm:w-[32%] w-[90%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg h-[70%]'>
+      <div className='sm:w-[32%] w-[90%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg h-[60%]'>
          <div className='text-[#ffffff] text-xs  w-full flex justify-end p-3 cursor-pointer' onClick={() => handleCancel()}>
             Close
          </div>
@@ -165,7 +185,7 @@ export const PopupModalPrompt = ({setPopUp,setPopUpTrial}) => {
    }
   return (
     <div className='h-screen flex justify-center items-center fixed w-full bg-blur'>
-      <div className='sm:w-[32%] w-[90%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg h-[70%]'>
+      <div className='sm:w-[32%] w-[90%] transition-all bg-[#A21D4E] overflow-scroll border rounded-lg h-[60%]'>
          <div className='text-[#ffffff] text-xs  w-full flex justify-end p-3 cursor-pointer' onClick={() => handleCancel()}>
             Close
          </div>

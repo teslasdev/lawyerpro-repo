@@ -14,11 +14,9 @@ const Chat = () => {
    const [email , setEmail] = useState("lawyer")
    const [displayName , setDisplay]= useState("")
    const [loader, setLoader] = useState(true)
-   const [responseData , setResponse] = useState(
-      [
-         
-      ]
-   )
+   const [welcome , setWelcome] = useState(true)
+   const [responseData , setResponse] = useState([])
+   const [dataHistory , setHistory] = useState() 
    const [isActive , setActive] = useState({
       0 : false
    })
@@ -28,12 +26,19 @@ const Chat = () => {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     };
 
+   const [hid] = useState(Math.random().toString(36).substring(2,30))
+
    useEffect(() => {
       const uid = localStorage.getItem('lawyepro-uid');
       if (!uid)  {
          navigate('/main/login')
       }
    }, [])
+
+   useEffect(() => {
+      setHistory(responseData)
+   })
+
 
    useEffect(() => {
       setTimeout(() => {
@@ -87,6 +92,9 @@ const Chat = () => {
       
    }
 
+
+
+
    let [result, setResult] = useState("");
 
    const resultRef = useRef();
@@ -106,6 +114,7 @@ const Chat = () => {
    // }
    let handleSend = async () => {
       if (prompt !== "") {
+         setWelcome(false)
          setResult("");
          scrollToBottom()
          setResponse((responseData) => [...responseData, 
@@ -152,12 +161,25 @@ const Chat = () => {
                setResult(resultRef.current);
             }
           } else {
-            setResponse((responseData) => [...responseData, 
+            setResponse((responseData) => [...responseData,
                {
-                  position : "start",
-                  content : resultRef.current
+                  position: "start",
+                  content: resultRef.current
                }
-            ])
+             ])
+
+            axios.post('http://localhost:8080/history' , 
+               {
+
+                  history : dataHistory,
+                  uid : localStorage.getItem('lawyepro-uid'),
+                  email : email,
+                  hid : hid
+               }).then((res) => {
+                  console.log(res)
+
+               }).catch((err)  => console.log(err))
+            
             setResult("")
             source.close();
           }
@@ -331,25 +353,45 @@ const Chat = () => {
                   </div>
                </div>
 
-               <div className='sm:h-[65%] h-[80%] flex p-4 flex-col overflow-scroll items-start gap-3' ref={chatContainerRef}>
+               <div className='sm:h-[70%] h-[80%] flex p-4 flex-col overflow-scroll items-start gap-3' ref={chatContainerRef}>
+               {welcome &&
+               <>
+               <div className={`w-full flex text-left justify-start`}>
+                  <p className='bg-[#f1f1f3] sm:max-w-[70%] max-w-[90%] text-[16px]  leading-8 font-normal  p-2 rounded-t-lg rounded-l-lg'>Hi🖖
+                     Please choose a question below, or feel free to type your own inquiry
+                  </p>
+               </div>
+               <div className={`w-full flex text-left justify-start cursor-pointer`} onClick={() => setPrompt("What are my rights as an employee?")}>
+                  <p className='bg-[#f2f0e4] sm:max-w-[70%] max-w-[90%] text-[16px]  leading-8 font-normal  p-2 rounded-t-lg rounded-l-lg'>👩‍💼 What are my rights as an employee?</p>
+               </div>
+
+               <div className={`w-full flex text-left justify-start cursor-pointer`} onClick={() => setPrompt("How do I file for divorce and what are the requirements?")}>
+                  <p className='bg-[#f2f0e4] sm:max-w-[70%] max-w-[90%] text-[16px]  leading-8 font-normal  p-2 rounded-t-lg rounded-l-lg'>💔How do I file for divorce and what are the requirements?</p>
+               </div>
+
+               <div className={`w-full flex text-left justify-start cursor-pointer`} onClick={() => setPrompt("How do I create a will or trust?")}>
+                  <p className='bg-[#f2f0e4] sm:max-w-[70%] max-w-[90%] text-[16px]  leading-8 font-normal  p-2 rounded-t-lg rounded-l-lg'>📑 How do I create a will or trust?</p>
+               </div>
+               </>
+               }
                {responseData && responseData.map((item , index) => {
                   return (
                      <>
                         <div className={`w-full flex justify-${item.position}`}>
-                           <p className={`${item.position === "end" ? 'bg-[#f1f1f3]' : 'bg-[#f2f0e4]'} sm:max-w-[60%] max-w-[90%] text-start  text-[16px] sm:leading-8 leading-6 font-light p-2 rounded-t-lg rounded-r-lg`}>{item.content}</p>
+                           <p className={`${item.position === "end" ? 'bg-[#f1f1f3]' : 'bg-[#f2f0e4]'} sm:max-w-[60%] max-w-[90%] text-start  text-[16px] sm:leading-8 leading-6 font-normal p-2 rounded-t-lg rounded-r-lg`}>{item.content}</p>
                         </div>
                      </>
                   )
                })}
                   {result &&
                      <div className={`w-full flex text-left justify-start`}>
-                        <p className='bg-[#f2f0e4] sm:max-w-[70%] max-w-[90%] text-[16px]  leading-8 font-light  p-2 rounded-t-lg rounded-l-lg'>{result}</p>
+                        <p className='bg-[#f2f0e4] sm:max-w-[70%] max-w-[90%] text-[16px]  leading-8 font-normal  p-2 rounded-t-lg rounded-l-lg'>{result}</p>
                      </div>
                   }
                  
                </div>
 
-               <div className='relative sm:h-[25%] h-[15%] border-t px-4'>
+               <div className='relative sm:h-[20%] h-[15%] border-t px-2'>
                      <div className='absolute sm:hidden flex items-center gap-3 px-1 py-1 text-[10px] font-normal -top-6  right-3 primary-color-btn rounded-t-lg'>
                         Prompt Library
                         <span className='bg-white w-[10px] border h-[10px] font-bold text-black flex justify-center items-center rounded-full'><BiPlus size={10} /></span>
@@ -357,7 +399,7 @@ const Chat = () => {
                   <div className='flex justify-center items-center h-full w-full'>
                      
                      <input type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} placeholder='Ask Something!' className='relative z-10 sm:px-5 p-2 border-none outline-none sm:h-[60px] h-[40px] w-full rounded-xl bg-gray-100' />
-                     <div className='absolute z-40  right-5 sm:w-[40px]  sm:h-[40px] w-[30px]  h-[30px]   bg-[#f2f0e4] rounded-full flex justify-center items-center cursor-pointer' onClick={handleSend}><HiArrowNarrowRight size={20} /></div>
+                     <div className='absolute z-40  right-5 sm:w-[40px]  sm:h-[30px] w-[30px]  h-[30px]   bg-[#f2f0e4] rounded-full flex justify-center items-center cursor-pointer' onClick={handleSend}><HiArrowNarrowRight size={20} /></div>
                   </div>
                </div>
             </div>
