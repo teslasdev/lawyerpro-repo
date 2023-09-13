@@ -1,17 +1,18 @@
 import { initializeApp } from 'firebase/app';
 import {getAuth} from 'firebase/auth';
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection } from "firebase/firestore";
 const firebaseConfig = {
-   apiKey: "AIzaSyA0SyADZ5EvwWDXS7EnRphf95BPKg6QDsg",
-   authDomain: "lawyerprop.firebaseapp.com",
-   projectId: "lawyerprop",
-   storageBucket: "lawyerprop.appspot.com",
-   messagingSenderId: "117432411000",
-   appId: "1:117432411000:web:ae6bc87a330cb2c51d1e8d"
+   apiKey: "AIzaSyDyu2j00-CxHG-_ulVftLskmhIJY52K0HU",
+   authDomain: "lawyer-pro-ai.firebaseapp.com",
+   projectId: "lawyer-pro-ai",
+   storageBucket: "lawyer-pro-ai.appspot.com",
+   messagingSenderId: "197547991679",
+   appId: "1:197547991679:web:5c8f3c7dcea0f64a48d54a",
+   measurementId: "G-TRC51RDMX5"
  };
 
 const firebaseApp = initializeApp(firebaseConfig);
-
+export const db = getFirestore(firebaseApp)
+export const dbUsers = collection(db, "users");
 export const auth = getAuth(firebaseApp);
-export const db = getFirestore(firebaseApp);
 export default firebaseApp;

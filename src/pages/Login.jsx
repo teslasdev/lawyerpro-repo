@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import Backdrop from './undraw_chatting_re_j55r.svg'
 import {  signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from '../firebase/config';
+import { auth, db, dbUser, dbUsers } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
+import { addDoc } from 'firebase/firestore';
 
 
 const Login = () => {
@@ -22,28 +23,41 @@ const Login = () => {
          });
          
          signInWithPopup(auth, provider)
-           .then((result) => {
+           .then( async (result) => {
              // This gives you a Google Access Token. You can use it to access the Google API.
-             const credential = GoogleAuthProvider.credentialFromResult(result);
-             const token = credential.accessToken;
-             // The signed-in user info.
+            //  const credential = GoogleAuthProvider.credentialFromResult(result);
+            //  const token = credential.accessToken;
+            //  // The signed-in user info.
              const user = result.user;
              // IdP data available using getAdditionalUserInfo(result)
              // ...
-             console.log(user)
-             localStorage.setItem('lawyepro-uid', user.uid)
-             localStorage.setItem('display_name', user.displayName)
-             localStorage.setItem('email', user.email)
-             localStorage.setItem('isSubscribed', false)
+            console.log(user)
+            localStorage.setItem('lawyepro-uid', user.uid)
+            localStorage.setItem('display_name', user.displayName)
+            localStorage.setItem('email', user.email)
+            localStorage.setItem('isSubscribed', false)
+            const data = {
+               uid : user.uid,
+               fullname: user.displayName,
+               isSubscribed: false
+            }
+            await addDoc(dbUsers, data)
+               .then(docRef => {
+               console.log(docRef.id); //p4eZcO5QV43IYnigxALJ
+            })
+            .catch(error => {
+               console.log(error);
+            })
              navigate('/')
            }).catch((error) => {
              // Handle Errors here.
-             const errorCode = error.code;
-             const errorMessage = error.message;
-             // The email of the user's account used.
-             const email = error.customData.email;
-             // The AuthCredential type that was used.
-             const credential = GoogleAuthProvider.credentialFromError(error);
+            //  const errorCode = error.code;
+            //  const errorMessage = error.message;
+            //  // The email of the user's account used.
+            //  const email = error.customData.email;
+            //  // The AuthCredential type that was used.
+            //  const credential = GoogleAuthProvider.credentialFromError(error);
+            console.log(error)
              // ...
            });
    };
